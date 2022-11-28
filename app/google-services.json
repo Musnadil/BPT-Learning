@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1049605559757",
+    "project_id": "bpt-learning",
+    "storage_bucket": "bpt-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049605559757:android:9c9040f8720e0b1bada084",
+        "android_client_info": {
+          "package_name": "com.indexdev.bptlearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049605559757-8don2p574n0kp9eikatmcjacng3tseul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indexdev.bptlearning",
+            "certificate_hash": "e567d77a3bbf8de16a6601ea0cd50179c5ff2e1c"
+          }
+        },
+        {
+          "client_id": "1049605559757-5qr2g0gr82u94vujfsvdfr3i4ash439m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANqdPvlEHr5IB4S7J8inEXJAnGhJxCXiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049605559757-5qr2g0gr82u94vujfsvdfr3i4ash439m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">BPT Learning</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="masuk">Masuk</string>
+    <string name="email">Email</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="mata_pelajaran">Mata Pelajaran</string>
+    <string name="tambah">Tambah</string>
+
+    <string-array name="mapel">
+        <item>Bahasa Inggris</item>
+        <item>Bahasa Indonesia</item>
+        <item>Agama</item>
+        <item>IPS</item>
+    </string-array>
+
+
+</resources>
