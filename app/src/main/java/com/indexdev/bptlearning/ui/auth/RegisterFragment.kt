@@ -38,6 +38,9 @@ class RegisterFragment : Fragment() {
         binding.btnDaftar.setOnClickListener {
             userCheck()
         }
+        binding.btnMasuk.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun userCheck() {

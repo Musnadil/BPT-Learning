@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         R.id.homeFragment,
         R.id.historyFragment,
         R.id.profilFragment,
-        R.id.loginFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
