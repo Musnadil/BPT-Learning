@@ -48,7 +48,15 @@
         android:id="@+id/homeFragment"
         android:name="com.indexdev.bptlearning.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/right_slide_out"
+            />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.indexdev.bptlearning.ui.history.HistoryFragment"
@@ -59,4 +67,9 @@
         android:name="com.indexdev.bptlearning.ui.profil.ProfilFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.indexdev.bptlearning.ui.additem.AddItemFragment"
+        android:label="fragment_add_item"
+        tools:layout="@layout/fragment_add_item" />
 </navigation>

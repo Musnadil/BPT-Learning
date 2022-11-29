@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentHomeBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.DEFAULT_VALUE
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
@@ -31,5 +33,9 @@ class HomeFragment : Fragment() {
         val preference = requireContext().getSharedPreferences(SHARED_PREFERENCES,Context.MODE_PRIVATE)
         val username = preference.getString(LOGIN_PREFERENCES, DEFAULT_VALUE)
         binding.tvUsername.text = username
+
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addItemFragment)
+        }
     }
 }
