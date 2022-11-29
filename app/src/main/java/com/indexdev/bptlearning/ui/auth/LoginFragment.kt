@@ -1,6 +1,7 @@
 package com.indexdev.bptlearning.ui.auth
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentLoginBinding
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.EMAIL_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_USER
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_EMAIL
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_PASSWORD
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.USERNAME_KEY
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LOGIN_PREFERENCES
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -55,6 +60,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(username: String, password: String) {
+        val preference =
+            requireContext().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val loginEditor = preference.edit()
+
         val getUser = db.collection(ENTITY_USER).document(username)
         getUser.get()
             .addOnSuccessListener {
@@ -70,6 +79,9 @@ class LoginFragment : Fragment() {
                             }
                             .show()
                     } else {
+                        loginEditor.putString(LOGIN_PREFERENCES, username)
+                        loginEditor.putString(EMAIL_PREFERENCES, it.get(FIELD_EMAIL).toString())
+                        loginEditor.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     }
                 } else {
