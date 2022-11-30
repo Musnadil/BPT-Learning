@@ -72,7 +72,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_masuk"
+        android:id="@+id/btn_logout"
         android:layout_width="168dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

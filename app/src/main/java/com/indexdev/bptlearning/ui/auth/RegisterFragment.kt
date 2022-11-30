@@ -16,6 +16,7 @@ import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentRegisterBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_USER
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_EMAIL
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_PASSWORD
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.USERNAME_KEY
 
 class RegisterFragment : Fragment() {
