@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".ui.linkcollection.LinkScreenFragment">
 
     <Toolbar
@@ -16,8 +17,8 @@
         >
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_arrow_back"
             />
         <TextView
@@ -27,7 +28,7 @@
             android:text="Mata Pelajaran"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="60dp"
             android:textStyle="bold"
             />
     </Toolbar>

@@ -55,6 +55,12 @@
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/zoom_out"
             app:popExitAnim="@anim/right_slide_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_linkScreenFragment"
+            app:destination="@id/linkScreenFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/right_slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -77,4 +83,9 @@
         android:name="com.indexdev.bptlearning.ui.additem.AddItemFragment"
         android:label="fragment_add_item"
         tools:layout="@layout/fragment_add_item" />
+    <fragment
+        android:id="@+id/linkScreenFragment"
+        android:name="com.indexdev.bptlearning.ui.linkcollection.LinkScreenFragment"
+        android:label="fragment_link_screen"
+        tools:layout="@layout/fragment_link_screen" />
 </navigation>
