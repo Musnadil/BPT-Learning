@@ -4,45 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".ui.linkcollection.LinkScreenFragment">
 
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/white"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/ic_arrow_back"
-            />
+            android:src="@drawable/ic_arrow_back" />
+
         <TextView
             android:id="@+id/tv_mapel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mata Pelajaran"
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:layout_marginStart="60dp"
-            android:textStyle="bold"
-            />
+            android:text="Mata Pelajaran"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_situs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:spanCount="2"
         tools:itemCount="30"
-        tools:listitem="@layout/item_situs"
-        />
+        tools:listitem="@layout/item_situs" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:progressTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_text_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:text="Maaf, belum ada situs yang bisa di kunjungi"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

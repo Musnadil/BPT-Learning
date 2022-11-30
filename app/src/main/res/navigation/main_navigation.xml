@@ -87,5 +87,14 @@
         android:id="@+id/linkScreenFragment"
         android:name="com.indexdev.bptlearning.ui.linkcollection.LinkScreenFragment"
         android:label="fragment_link_screen"
-        tools:layout="@layout/fragment_link_screen" />
+        tools:layout="@layout/fragment_link_screen" >
+        <action
+            android:id="@+id/action_linkScreenFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.indexdev.bptlearning.ui.webview.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" />
 </navigation>

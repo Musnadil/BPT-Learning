@@ -11,6 +11,7 @@ class ConstantVariable {
         //bundle
         const val USERNAME_KEY = "USERNAME"
         const val MAPEL_KEY = "MAPEL"
+        const val LINK_KEY = "LINK"
 
         //shared preferences
         const val SHARED_PREFERENCES = "SHARED_PREFERENCES"

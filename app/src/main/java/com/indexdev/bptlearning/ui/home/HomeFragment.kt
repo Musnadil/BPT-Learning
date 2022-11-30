@@ -13,12 +13,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentHomeBinding
-import com.indexdev.bptlearning.ui.ConstantVariable
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.DEFAULT_VALUE
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_MAPEL
-import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LOGIN_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.MAPEL_KEY
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -64,7 +63,10 @@ class HomeFragment : Fragment() {
                     mapelAdapter.setOnItemClickListener(object : MapelAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             bundle.putString(MAPEL_KEY, listMapel[position])
-                            findNavController().navigate(R.id.action_homeFragment_to_linkScreenFragment,bundle)
+                            findNavController().navigate(
+                                R.id.action_homeFragment_to_linkScreenFragment,
+                                bundle
+                            )
                         }
                     })
                 }
@@ -74,8 +76,4 @@ class HomeFragment : Fragment() {
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.pbLoading.visibility = View.VISIBLE
-    }
 }
