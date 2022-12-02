@@ -1,5 +1,6 @@
 package com.indexdev.bptlearning.ui.webview
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,20 +12,30 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.indexdev.bptlearning.R
+import com.indexdev.bptlearning.data.model.HistoryModel
 import com.indexdev.bptlearning.databinding.FragmentWebViewBinding
+import com.indexdev.bptlearning.ui.ConstantVariable
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.DEFAULT_VALUE
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_MAPEL
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LINK_KEY
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LOGIN_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.MAPEL_KEY
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
 
 class WebViewFragment : Fragment() {
     private var _binding: FragmentWebViewBinding? = null
     private val binding get() = _binding!!
     private lateinit var webView: WebView
     private lateinit var db: FirebaseFirestore
+    private lateinit var dbRef: DatabaseReference
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +52,11 @@ class WebViewFragment : Fragment() {
         if (statusBarHeight > 0) {
             binding.statusbar.layoutParams.height = resources.getDimensionPixelSize(statusBarHeight)
         }
+        val preference =
+            requireContext().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val username = preference.getString(LOGIN_PREFERENCES,DEFAULT_VALUE).toString()
+        dbRef = FirebaseDatabase.getInstance().getReference(username)
+
         var link = ""
         db = Firebase.firestore
         val mapel = arguments?.getString(MAPEL_KEY).toString()
@@ -75,6 +91,10 @@ class WebViewFragment : Fragment() {
                         binding.progressbar.visibility = View.GONE
                     }
                 }
+                val historyID = dbRef.push().key!!
+                val history = HistoryModel(historyID,situs,link)
+
+                dbRef.child(historyID).setValue(history)
             }
     }
 }

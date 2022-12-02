@@ -177,10 +177,4 @@ class AddItemDialogFragment() : DialogFragment() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
 }

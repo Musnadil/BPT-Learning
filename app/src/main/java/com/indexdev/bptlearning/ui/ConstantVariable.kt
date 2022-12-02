@@ -5,6 +5,7 @@ class ConstantVariable {
         // firebase
         const val ENTITY_USER = "users"
         const val ENTITY_MAPEL = "mapel"
+        const val ENTITY_HISTORY = "history"
         const val FIELD_EMAIL = "email"
         const val FIELD_PASSWORD = "password"
 
