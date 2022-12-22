@@ -1,6 +1,7 @@
 package com.indexdev.bptlearning.ui.auth
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,14 +19,15 @@ import com.indexdev.bptlearning.ui.ConstantVariable.Companion.EMAIL_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_USER
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_EMAIL
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_PASSWORD
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LOGIN_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.SHARED_PREFERENCES
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.USERNAME_KEY
-import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LOGIN_PREFERENCES
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private lateinit var db: FirebaseFirestore
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +46,13 @@ class LoginFragment : Fragment() {
         val bundleUsername = arguments?.getString(USERNAME_KEY)
         binding.etUsername.setText(bundleUsername)
 
+        progressDialog = ProgressDialog(requireContext())
+
         binding.btnMasuk.setOnClickListener {
-            val username = binding.etUsername.text.toString()
+            binding.usernameContainer.error = null
+            binding.passwordContainer.error = null
+
+            val username = binding.etUsername.text.toString().lowercase()
             val password = binding.etPassword.text.toString()
             if (username.isEmpty()) {
                 binding.usernameContainer.error = "Nama tidak boleh kosong"
@@ -60,6 +67,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(username: String, password: String) {
+        progressDialog.setMessage("Mohon tunggu sebentar...")
+        progressDialog.show()
         val preference =
             requireContext().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val loginEditor = preference.edit()
@@ -67,6 +76,7 @@ class LoginFragment : Fragment() {
         val getUser = db.collection(ENTITY_USER).document(username)
         getUser.get()
             .addOnSuccessListener {
+                progressDialog.dismiss()
                 if (it.data != null) {
                     if (it.get(FIELD_PASSWORD) != password) {
                         AlertDialog.Builder(context)
@@ -97,6 +107,7 @@ class LoginFragment : Fragment() {
                 }
             }
             .addOnFailureListener {
+                progressDialog.dismiss()
                 Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
             }
     }

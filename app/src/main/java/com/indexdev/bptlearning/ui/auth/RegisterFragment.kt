@@ -1,6 +1,7 @@
 package com.indexdev.bptlearning.ui.auth
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -16,7 +17,6 @@ import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentRegisterBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_USER
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_EMAIL
-import com.indexdev.bptlearning.ui.ConstantVariable.Companion.FIELD_PASSWORD
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.USERNAME_KEY
 
 class RegisterFragment : Fragment() {
@@ -24,6 +24,7 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
     private val bundle = Bundle()
     private lateinit var db: FirebaseFirestore
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +43,12 @@ class RegisterFragment : Fragment() {
         binding.btnMasuk.setOnClickListener {
             findNavController().popBackStack()
         }
+        progressDialog = ProgressDialog(requireContext())
     }
 
     private fun userCheck() {
-        val email = binding.etEmail.text.toString()
-        val username = binding.etUsername.text.toString()
+        val email = binding.etEmail.text.toString().lowercase()
+        val username = binding.etUsername.text.toString().lowercase()
         val password = binding.etPassword.text.toString()
         val confPassword = binding.etKonfirmasiPassword.text.toString()
         if (email.isEmpty()) {
@@ -68,12 +70,15 @@ class RegisterFragment : Fragment() {
             binding.konfirmasiPasswordContainer.error = "Konfirmasi Password tidak sama"
             binding.etKonfirmasiPassword.requestFocus()
         } else {
-            bundle.putString(USERNAME_KEY, username)
+            progressDialog.setMessage("Mohon tunggu sebentar...")
+            progressDialog.show()
+
             val getUsername = db.collection(ENTITY_USER).document(username)
             getUsername.get()
                 .addOnSuccessListener {
                     //checking username (primary field)
                     if (it.data != null) {
+                        progressDialog.dismiss()
                         //username already taken
                         AlertDialog.Builder(context)
                             .setTitle("Pesan")
@@ -91,6 +96,7 @@ class RegisterFragment : Fragment() {
                             .addOnSuccessListener { emailCheck ->
                                 // email check(field)
                                 if (emailCheck.documents.isNotEmpty()) {
+                                    progressDialog.dismiss()
                                     AlertDialog.Builder(context)
                                         .setTitle("Pesan")
                                         .setMessage("Email sudah digunakan")
@@ -105,6 +111,7 @@ class RegisterFragment : Fragment() {
                                 }
                             }
                             .addOnFailureListener { emailCheck ->
+                                progressDialog.dismiss()
                                 Toast.makeText(
                                     requireContext(),
                                     "${emailCheck.message}",
@@ -114,12 +121,14 @@ class RegisterFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener {
+                    progressDialog.dismiss()
                     Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }
 
     private fun register(email: String, username: String, password: String) {
+        bundle.putString(USERNAME_KEY, username)
         val user = hashMapOf(
             "email" to email,
             "password" to password
@@ -127,6 +136,7 @@ class RegisterFragment : Fragment() {
         db.collection(ENTITY_USER).document(username)
             .set(user)
             .addOnSuccessListener {
+                progressDialog.dismiss()
                 AlertDialog.Builder(context)
                     .setTitle("Pesan")
                     .setMessage("Pendaftaran berhasil, mohon masuk kembali")
@@ -141,6 +151,7 @@ class RegisterFragment : Fragment() {
                     .show()
             }
             .addOnFailureListener {
+                progressDialog.dismiss()
                 Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT)
                     .show()
             }

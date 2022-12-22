@@ -46,7 +46,8 @@ class HomeFragment : Fragment() {
         db = Firebase.firestore
         listMapel = arrayListOf()
 
-        binding.tvUsername.text = username
+        binding.fabAdd.visibility = View.GONE
+        binding.tvUsername.text = username?.uppercase()
 
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addItemFragment)

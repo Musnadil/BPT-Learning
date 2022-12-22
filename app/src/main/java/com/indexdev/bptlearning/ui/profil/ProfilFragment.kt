@@ -2,12 +2,14 @@ package com.indexdev.bptlearning.ui.profil
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.indexdev.bptlearning.MainActivity
 import com.indexdev.bptlearning.R
 import com.indexdev.bptlearning.databinding.FragmentProfilBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.DEFAULT_VALUE
@@ -46,7 +48,9 @@ class ProfilFragment : Fragment() {
                 setPositiveButton("Yes") { dialogY, _ ->
                     dialogY.dismiss()
                     preference.edit().clear().apply()
-                    findNavController().navigate(R.id.action_profilFragment_to_loginFragment)
+                    activity?.finish()
+                    startActivity(Intent(requireContext(),MainActivity::class.java))
+//                    findNavController().navigate(R.id.action_profilFragment_to_loginFragment)
                 }
             }
             alertDialog.show()
