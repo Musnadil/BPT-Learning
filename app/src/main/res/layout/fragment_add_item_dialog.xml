@@ -74,6 +74,35 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_container_keterangan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:hint="Keterangan"
+        android:visibility="gone"
+        app:boxCornerRadiusBottomEnd="30dp"
+        app:boxCornerRadiusBottomStart="30dp"
+        app:boxCornerRadiusTopEnd="30dp"
+        app:boxCornerRadiusTopStart="30dp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_container_nama_situs">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_keterangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="6"
+            android:maxLines="6"
+            android:imeOptions="actionDone"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_container"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
@@ -88,7 +117,7 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_container_nama_situs">
+        app:layout_constraintTop_toBottomOf="@id/et_container_keterangan">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_edit_text"

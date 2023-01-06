@@ -11,11 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.indexdev.bptlearning.R
+import com.indexdev.bptlearning.data.model.MateriModel
 import com.indexdev.bptlearning.data.model.QuizModel
 import com.indexdev.bptlearning.databinding.FragmentAddItemDialogBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_MAPEL
@@ -169,6 +171,8 @@ class AddItemDialogFragment() : DialogFragment() {
         listMapel.clear()
         binding.btnTambah.isEnabled = false
         binding.etDropdownContainer.visibility = View.GONE
+        binding.etContainerKeterangan.visibility = View.VISIBLE
+        binding.etContainerNamaSitus.hint = "Nama Materi"
         val getMapel = db.collection(ENTITY_MAPEL)
         getMapel.get()
             .addOnSuccessListener {
@@ -188,8 +192,12 @@ class AddItemDialogFragment() : DialogFragment() {
             binding.btnTambah.isEnabled = false
             val mapel = binding.etDropdownText.text.toString()
             val namaSitus = binding.etNamaSitus.text.toString()
+            val keterangan = binding.etKeterangan.text.toString()
             val situs = binding.etEditText.text.toString()
-            val data = hashMapOf(namaSitus to situs)
+//            val data = hashMapOf(namaSitus to situs)
+            val materi = MateriModel(
+                namaSitus,keterangan,situs
+            )
             binding.etDropdownContainer.error = null
             binding.etContainerNamaSitus.error = null
             binding.etContainer.error = null
@@ -199,12 +207,16 @@ class AddItemDialogFragment() : DialogFragment() {
             } else if (namaSitus.isEmpty()) {
                 binding.etContainerNamaSitus.error = "Nama situs tidak boleh kosong"
                 binding.btnTambah.isEnabled = true
+            }else if (keterangan.isEmpty()) {
+                binding.etContainerKeterangan.error = "Keterangan tidak boleh kosong"
+                binding.btnTambah.isEnabled = true
             } else if (situs.isEmpty()) {
                 binding.etContainer.error = "Link tidak boleh kosong"
                 binding.btnTambah.isEnabled = true
             } else {
                 db.collection(ENTITY_MAPEL).document(mapel)
-                    .set(data, SetOptions.merge())
+//                    .set(data, SetOptions.merge())
+                    .update("Materi",FieldValue.arrayUnion(materi))
                     .addOnSuccessListener {
                         binding.btnTambah.isEnabled = true
                         Toast.makeText(
