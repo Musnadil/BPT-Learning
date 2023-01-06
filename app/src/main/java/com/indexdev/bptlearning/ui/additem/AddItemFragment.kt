@@ -35,5 +35,9 @@ class AddItemFragment : Fragment() {
             val dialogAdd = AddItemDialogFragment("situs")
             activity?.let { dialogAdd.show(it.supportFragmentManager, null) }
         }
+        binding.btnAddQuiz.setOnClickListener {
+            val dialogAdd = AddItemDialogFragment("quiz")
+            activity?.let { dialogAdd.show(it.supportFragmentManager, null) }
+        }
     }
 }

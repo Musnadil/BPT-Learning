@@ -9,13 +9,17 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.indexdev.bptlearning.R
+import com.indexdev.bptlearning.data.model.QuizModel
 import com.indexdev.bptlearning.databinding.FragmentAddItemDialogBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_MAPEL
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_QUIZ
 
 class AddItemDialogFragment() : DialogFragment() {
     private var _binding: FragmentAddItemDialogBinding? = null
@@ -23,6 +27,7 @@ class AddItemDialogFragment() : DialogFragment() {
     lateinit var selectedMode: String
     private lateinit var db: FirebaseFirestore
     val listMapel: MutableList<String> = ArrayList()
+    private lateinit var dbRef: DatabaseReference
 
     constructor(choice: String) : this() {
         this.selectedMode = choice
@@ -42,6 +47,7 @@ class AddItemDialogFragment() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         db = Firebase.firestore
+        dbRef = FirebaseDatabase.getInstance().getReference(ENTITY_QUIZ)
 
         var mode = ""
         if (this::selectedMode.isInitialized) {
@@ -52,6 +58,57 @@ class AddItemDialogFragment() : DialogFragment() {
             mapelMode()
         } else if (mode == "situs") {
             situsMode()
+        } else if (mode == "quiz"){
+            quizMode()
+        }
+    }
+
+    private fun quizMode() {
+        binding.etDropdownContainer.visibility = View.GONE
+        binding.etContainerNamaSitus.hint = "Nama Quiz"
+        binding.etContainer.hint = "Link Quiz"
+        binding.tvTitle.text = "Tambah Quiz"
+        binding.btnTambah.setOnClickListener {
+            binding.etContainerNamaSitus.error = null
+            binding.etContainer.error = null
+            binding.btnTambah.isEnabled = false
+            val quizName = binding.etNamaSitus.text.toString()
+            val quizLink = binding.etEditText.text.toString()
+            if (quizName.isEmpty()){
+                binding.etContainerNamaSitus.error = "Nama quiz tidak boleh kosong"
+                binding.btnTambah.isEnabled = true
+            }else if (quizLink.isEmpty()){
+                binding.etContainer.error = "Link quiz tidak boleh kosong"
+                binding.btnTambah.isEnabled = true
+            }
+            else{
+                val quizId = dbRef.push().key!!
+                val quiz = QuizModel(quizId,quizName,quizLink)
+                dbRef.child(quizId).setValue(quiz)
+                    .addOnSuccessListener {
+                        AlertDialog.Builder(context)
+                            .setTitle("Pesan")
+                            .setMessage("Quiz $quizName berhasil ditambahkan")
+                            .setCancelable(false)
+                            .setPositiveButton("OK") { positive, _ ->
+                                positive.dismiss()
+                                dialog?.dismiss()
+                            }
+                            .show()
+                    }
+                    .addOnFailureListener {
+                        AlertDialog.Builder(context)
+                            .setTitle("Pesan")
+                            .setMessage("Gagal menambahkan quiz $quizName karena ${it.message}")
+                            .setCancelable(false)
+                            .setPositiveButton("OK") { positive, _ ->
+                                positive.dismiss()
+                                dialog?.dismiss()
+                            }
+                            .show()
+                    }
+
+            }
         }
     }
 

@@ -97,4 +97,9 @@
         android:name="com.indexdev.bptlearning.ui.webview.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view" />
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.indexdev.bptlearning.ui.quiz.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" />
 </navigation>
