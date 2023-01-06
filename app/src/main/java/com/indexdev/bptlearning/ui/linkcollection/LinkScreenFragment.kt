@@ -52,7 +52,7 @@ class LinkScreenFragment : Fragment() {
             .addOnSuccessListener {
                 binding.pbLoading.visibility = View.GONE
                 if (it.data != null) {
-                    val situs = ArrayList(it.data!!.keys)
+                    val situs = ArrayList(it.data!!.keys).sorted()
                     listSitus.addAll(situs)
                     val linkAdapter = LinkAdapter(listSitus)
                     binding.rvSitus.adapter = linkAdapter

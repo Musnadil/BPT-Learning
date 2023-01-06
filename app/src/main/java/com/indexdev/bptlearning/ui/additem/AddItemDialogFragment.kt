@@ -58,7 +58,7 @@ class AddItemDialogFragment() : DialogFragment() {
             mapelMode()
         } else if (mode == "situs") {
             situsMode()
-        } else if (mode == "quiz"){
+        } else if (mode == "quiz") {
             quizMode()
         }
     }
@@ -74,27 +74,22 @@ class AddItemDialogFragment() : DialogFragment() {
             binding.btnTambah.isEnabled = false
             val quizName = binding.etNamaSitus.text.toString()
             val quizLink = binding.etEditText.text.toString()
-            if (quizName.isEmpty()){
+            if (quizName.isEmpty()) {
                 binding.etContainerNamaSitus.error = "Nama quiz tidak boleh kosong"
                 binding.btnTambah.isEnabled = true
-            }else if (quizLink.isEmpty()){
+            } else if (quizLink.isEmpty()) {
                 binding.etContainer.error = "Link quiz tidak boleh kosong"
                 binding.btnTambah.isEnabled = true
-            }
-            else{
+            } else {
                 val quizId = dbRef.push().key!!
-                val quiz = QuizModel(quizId,quizName,quizLink)
+                val quiz = QuizModel(quizId, quizName, quizLink)
                 dbRef.child(quizId).setValue(quiz)
                     .addOnSuccessListener {
-                        AlertDialog.Builder(context)
-                            .setTitle("Pesan")
-                            .setMessage("Quiz $quizName berhasil ditambahkan")
-                            .setCancelable(false)
-                            .setPositiveButton("OK") { positive, _ ->
-                                positive.dismiss()
-                                dialog?.dismiss()
-                            }
-                            .show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Quiz $quizName berhasil ditambahkan",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     .addOnFailureListener {
                         AlertDialog.Builder(context)
@@ -147,7 +142,7 @@ class AddItemDialogFragment() : DialogFragment() {
                                     Toast.makeText(
                                         requireContext(),
                                         "Berhasil menambahkan mata pelajaran",
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_LONG
                                     ).show()
                                     dialog?.dismiss()
                                 }
@@ -184,7 +179,7 @@ class AddItemDialogFragment() : DialogFragment() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_LONG).show()
             }
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, listMapel)
         binding.etDropdownText.setAdapter(arrayAdapter)
@@ -214,8 +209,8 @@ class AddItemDialogFragment() : DialogFragment() {
                         binding.btnTambah.isEnabled = true
                         Toast.makeText(
                             requireContext(),
-                            "Berhasil menambahkan link $namaSitus",
-                            Toast.LENGTH_SHORT
+                            "Berhasil menambahkan materi $namaSitus",
+                            Toast.LENGTH_LONG
                         ).show()
                         dialog?.dismiss()
                     }

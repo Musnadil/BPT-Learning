@@ -22,17 +22,10 @@
             android:backgroundTint="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_arrow_back" />
-
             <TextView
                 android:id="@+id/tv_mapel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
                 android:text="Quiz"
                 android:textColor="@color/black"
                 android:textSize="20sp"

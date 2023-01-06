@@ -14,14 +14,14 @@
         android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_mapel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profil"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_mapel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Profil"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold" />-->
     </Toolbar>
 
     <ImageView

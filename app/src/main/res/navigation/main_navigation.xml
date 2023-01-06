@@ -101,5 +101,17 @@
         android:id="@+id/quizFragment"
         android:name="com.indexdev.bptlearning.ui.quiz.QuizFragment"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizWebViewFragment"
+            app:destination="@id/quizWebViewFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/right_slide_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/quizWebViewFragment"
+        android:name="com.indexdev.bptlearning.ui.quiz.QuizWebViewFragment"
+        android:label="fragment_quiz_web_view"
+        tools:layout="@layout/fragment_quiz_web_view" />
 </navigation>
