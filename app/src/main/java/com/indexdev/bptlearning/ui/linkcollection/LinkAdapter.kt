@@ -3,9 +3,10 @@ package com.indexdev.bptlearning.ui.linkcollection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.indexdev.bptlearning.data.model.MateriModel
 import com.indexdev.bptlearning.databinding.ItemSitusBinding
 
-class LinkAdapter(private var listSitus: ArrayList<String>) :
+class LinkAdapter(private var listSitus: ArrayList<MateriModel?>) :
     RecyclerView.Adapter<LinkAdapter.ViewHolder>() {
 
     class ViewHolder(
@@ -38,7 +39,7 @@ class LinkAdapter(private var listSitus: ArrayList<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             tvNomor.text = (position+1).toString()
-            tvNamaSitus.text = listSitus[position]
+            tvNamaSitus.text = listSitus[position]?.namaMateri ?: ""
         }
     }
 
