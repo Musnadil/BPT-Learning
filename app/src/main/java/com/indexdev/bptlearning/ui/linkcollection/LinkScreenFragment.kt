@@ -20,8 +20,10 @@ import com.indexdev.bptlearning.data.model.MateriModel
 import com.indexdev.bptlearning.data.model.NewModel
 import com.indexdev.bptlearning.databinding.FragmentLinkScreenBinding
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.ENTITY_MAPEL
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.KETERANGAN
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.LINK_KEY
 import com.indexdev.bptlearning.ui.ConstantVariable.Companion.MAPEL_KEY
+import com.indexdev.bptlearning.ui.ConstantVariable.Companion.NAMA_MATERI
 import kotlin.time.days
 
 
@@ -71,16 +73,17 @@ class LinkScreenFragment : Fragment() {
                         )
                         listSitus.add(materi)
                     }
-                    Log.d("asdasd","${listSitus.size}")
                     val linkAdapter = LinkAdapter(listSitus)
                     binding.rvSitus.adapter = linkAdapter
-                    bundle.putString(MAPEL_KEY, namaMapel)
+//                    bundle.putString(MAPEL_KEY, namaMapel)
 
                     linkAdapter.setOnItemClickListener(object : LinkAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
-//                            bundle.putString(LINK_KEY,listSitus[position])
+                            bundle.putString(NAMA_MATERI, listSitus[position]?.namaMateri)
+                            bundle.putString(KETERANGAN, listSitus[position]?.keterangan)
+                            bundle.putString(LINK_KEY, listSitus[position]?.situs)
                             findNavController().navigate(
-                                R.id.action_linkScreenFragment_to_webViewFragment,
+                                R.id.action_linkScreenFragment_to_materiFragment,
                                 bundle
                             )
                         }

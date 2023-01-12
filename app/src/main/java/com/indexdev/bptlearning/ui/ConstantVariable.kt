@@ -14,6 +14,8 @@ class ConstantVariable {
         const val USERNAME_KEY = "USERNAME"
         const val MAPEL_KEY = "MAPEL"
         const val LINK_KEY = "LINK"
+        const val NAMA_MATERI = "NAMA_MATERI"
+        const val KETERANGAN = "KETERANGAN"
 
         //shared preferences
         const val SHARED_PREFERENCES = "SHARED_PREFERENCES"

@@ -89,8 +89,11 @@
         android:label="fragment_link_screen"
         tools:layout="@layout/fragment_link_screen" >
         <action
-            android:id="@+id/action_linkScreenFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            android:id="@+id/action_linkScreenFragment_to_materiFragment"
+            app:destination="@id/materiFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/right_slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -114,4 +117,16 @@
         android:name="com.indexdev.bptlearning.ui.quiz.QuizWebViewFragment"
         android:label="fragment_quiz_web_view"
         tools:layout="@layout/fragment_quiz_web_view" />
+    <fragment
+        android:id="@+id/materiFragment"
+        android:name="com.indexdev.bptlearning.ui.materi.MateriFragment"
+        android:label="fragment_materi"
+        tools:layout="@layout/fragment_materi" >
+        <action
+            android:id="@+id/action_materiFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/right_slide_out"/>
+    </fragment>
 </navigation>

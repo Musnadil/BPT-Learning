@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         db = Firebase.firestore
         listMapel = arrayListOf()
 
-        binding.fabAdd.visibility = View.VISIBLE
+        binding.fabAdd.visibility = View.GONE
         binding.tvUsername.text = username?.uppercase()
 
         binding.fabAdd.setOnClickListener {
